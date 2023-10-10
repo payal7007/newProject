@@ -9,7 +9,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>MyAdvertiseModel</h4>
         <hr />
@@ -22,13 +22,7 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.productSubCategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.productSubCategoryId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.productSubCategoryId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.productSubCategoryName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -62,13 +56,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.areaId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.areaId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.areaId, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.areaName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -137,7 +124,38 @@
         </div>
     </div>
 }
-
+<div id="messageDiv" style="display: none;"></div>
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+<script>$("#saveButton").click(function () {
+        // Perform the update using Ajax
+        $.ajax({
+            url: "/YourControllerName/Update",
+            type: "POST", // or "GET" depending on your server-side action
+            data: {
+                advertiseId: advertisement.advertiseId, // Include any necessary data here
+                // Add other parameters as needed
+            },
+            success: function (data) {
+                if (data.success) {
+                    // Update was successful, display the success message
+                    $("#messageDiv").html("Record updated successfully!");
+                    $("#messageDiv").css("background-color", "#4CAF50").css("color", "white");
+                    $("#messageDiv").fadeIn().delay(3000).fadeOut(); // Show and hide message after 3 seconds
+                } else {
+                    // Update failed, display an error message if needed
+                    $("#messageDiv").html("Update failed. Please try again.");
+                    $("#messageDiv").css("background-color", "red").css("color", "white");
+                    $("#messageDiv").fadeIn().delay(3000).fadeOut();
+                }
+            },
+            error: function () {
+                // An error occurred, display an error message if needed
+                $("#messageDiv").html("An error occurred. Please try again later.");
+                $("#messageDiv").css("background-color", "red").css("color", "white");
+                $("#messageDiv").fadeIn().delay(3000).fadeOut();
+            }
+        });
+    });
+</script>

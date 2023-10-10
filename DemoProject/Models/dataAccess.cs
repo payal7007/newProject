@@ -33,11 +33,11 @@ namespace DemoProject.Models
                 MyAdvertiseModel product = new MyAdvertiseModel();
 
                 product.advertiseId = Convert.ToInt32(rdr["advertiseId"]);
-                product.productSubCategoryId = Convert.ToInt32(rdr["productSubCategoryId"]);
+                product.productSubCategoryName = Convert.ToString(rdr["productSubCategoryName"]);
                 product.advertiseTitle = rdr["advertiseTitle"].ToString();
                 product.advertiseDescription = rdr["advertiseDescription"].ToString();
                 product.advertisePrice = Convert.ToDecimal(rdr["advertisePrice"]);
-                product.areaId = Convert.ToInt32(rdr["areaId"]);
+                product.areaName = Convert.ToString(rdr["areaName"]);
                 product.advertiseStatus = Convert.ToBoolean(rdr["advertiseStatus"]);
                 product.UserId = Convert.ToInt32(rdr["UserId"]);
                 product.advertiseapproved = Convert.ToBoolean(rdr["advertiseapproved"]);
